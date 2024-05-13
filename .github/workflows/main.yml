@@ -1,4 +1,5 @@
-name: Java CI
+name: Workflow
+
 on:
   - push
   - pull_request
@@ -8,23 +9,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up openJDK
-        uses: actions/setup-java@v2
+      - name: Checkout project sources
+        uses: actions/checkout@v2
+      - name: Setup java
+        uses: actions/setup-java@v3
         with:
+          java-version: '20'
           distribution: 'temurin'
-          java-version: '17'
-      - name: Build with Gradle
+      - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: build
-          build-root-directory: app
+          gradle-version: 8.4
+      - name: Build, tests, lint
+        run: |
+          make build
+          make test
+          make lint
       - name: Publish code coverage
-        uses: paambaati/codeclimate-action@v2.5.0
+        uses: paambaati/codeclimate-action@v3.2.0
         env:
-          CC_TEST_REPORTER_ID: fab317e682981024e0fcd36034a84a8707aa061036f3bd9a700fc30cbd657b88
-          JACOCO_SOURCE_PATH: ${{github.workspace}}/app/src/main/java
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+          JACOCO_SOURCE_PATH: app/src/main/java
         with:
-          coverageCommand: make -C app report
-          debug: true
+          coverageCommand: make report
           coverageLocations: ${{github.workspace}}/app/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
