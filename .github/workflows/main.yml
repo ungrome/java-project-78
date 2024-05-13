@@ -9,21 +9,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-java@v3
+      - name: Checkout project sources
+        uses: actions/checkout@v2
+      - name: Setup java
+        uses: actions/setup-java@v3
         with:
-          java-version: '21'
+          java-version: '20'
           distribution: 'temurin'
-      - name: Build with Gradle
+      - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: build
-          build-root-directory: app
+          gradle-version: 8.4
+      - name: Build, tests, lint
+        run: |
+          make build
+          make test
+          make lint
       - name: Publish code coverage
-        uses: paambaati/codeclimate-action@v3.0.0
+        uses: paambaati/codeclimate-action@v3.2.0
         env:
-          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
           JACOCO_SOURCE_PATH: app/src/main/java
         with:
           coverageCommand: make report
-          coverageLocations: ${{github.workspace}}/app/build/reports/jacoco/test/jacocoTestReport.xml:jacocoTestReport.xml:jacoco
+          coverageLocations: ${{github.workspace}}/app/build/reports/jacoco/test/jacocoTestReport.xml:jacocooTestReport.xml:jacocoTestReport.xml:jacoco
