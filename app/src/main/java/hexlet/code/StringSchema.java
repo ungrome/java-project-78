@@ -1,15 +1,15 @@
 package hexlet.code;
 
 public class StringSchema {
-    public StringSchema required(){
+    public StringSchema required() {
         return this;
     }
 
-    public StringSchema minLength(){
+    public StringSchema minLength() {
         return this;
     }
 
-    public StringSchema contains(){
+    public StringSchema contains() {
         return this;
     }
 }
