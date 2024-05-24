@@ -5,4 +5,8 @@ public class Validator {
         StringSchema stringSchema = new StringSchema();
         return stringSchema;
     }
+    public NumberSchema number() {
+        NumberSchema numberSchema = new NumberSchema();
+        return numberSchema;
+    }
 }
