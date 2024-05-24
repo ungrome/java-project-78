@@ -17,8 +17,8 @@ public class NumberSchema {
         return this;
     }
     public NumberSchema range(int down, int up) {
-        Predicate<Object> check = (obj) -> (obj instanceof Number num) &&
-                (num.intValue() >= down) && (num.intValue() <= up);
+        Predicate<Object> check = (obj) -> (obj instanceof Number num)
+                && (num.intValue() >= down) && (num.intValue() <= up);
         checkResults.put("range", check);
         return this;
     }
