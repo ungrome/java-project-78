@@ -1,11 +1,8 @@
 package hexlet.code;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Predicate;
 
-public class NumberSchema {
-    private final Map<String, Predicate<Object>> checkResults = new HashMap<>();
+public class NumberSchema extends BaseSchema{
     public NumberSchema required() {
         Predicate<Object> check = (obj) -> obj instanceof Number;
         checkResults.put("required", check);
@@ -21,9 +18,6 @@ public class NumberSchema {
                 && (num.intValue() >= down) && (num.intValue() <= up);
         checkResults.put("range", check);
         return this;
-    }
-    public final boolean isValid(Integer data) {
-        return checkResults.values().stream().allMatch(p -> p.test(data));
     }
 }
 

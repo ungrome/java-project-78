@@ -1,12 +1,9 @@
 package hexlet.code;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Predicate;
 
-public class StringSchema {
+public class StringSchema extends BaseSchema {
 
-    private final Map<String, Predicate<Object>> checkResults = new HashMap<>();
     public StringSchema required() {
         Predicate<Object> check = (obj) -> obj instanceof String str && !str.isBlank();
         checkResults.put("required", check);
@@ -23,7 +20,5 @@ public class StringSchema {
         checkResults.put("contains", check);
         return this;
     }
-    public final boolean isValid(String data) {
-        return checkResults.values().stream().allMatch(p -> p.test(data));
-    }
+
 }
