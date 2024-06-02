@@ -2,11 +2,12 @@ package hexlet.code;
 
 public class Validator {
     public StringSchema string() {
-        StringSchema stringSchema = new StringSchema();
-        return stringSchema;
+        return new StringSchema();
     }
     public NumberSchema number() {
-        NumberSchema numberSchema = new NumberSchema();
-        return numberSchema;
+        return new NumberSchema();
+    }
+    public MapSchema map() {
+        return new MapSchema();
     }
 }
