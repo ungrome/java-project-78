@@ -21,7 +21,7 @@ public class MapSchemaTest {
         var data = new HashMap<String, String>();
         data.put("key1", "value1");
         assertTrue(schema.isValid(data)); // true
-        schema.sizeOf(2);
+        schema.sizeof(2);
         assertFalse(schema.isValid(data));  // false
         data.put("key2", "value2");
         assertTrue(schema.isValid(data)); // true
@@ -31,7 +31,7 @@ public class MapSchemaTest {
         Validator v = new Validator();
         MapSchema schema = v.map();
 
-        Map<String, BaseSchema<?>> schemas = new HashMap<>();
+        Map<String, BaseSchema<String>> schemas = new HashMap<>();
         schemas.put("firstName", v.string().required());
         schemas.put("lastName", v.string().required().minLength(2));
 

@@ -9,13 +9,13 @@ public class MapSchema extends BaseSchema {
         checkResults.put("required", check);
         return this;
     }
-    public MapSchema sizeOf(int count) {
+    public MapSchema sizeof(int count) {
         Predicate<Object> check;
         check = (obj) -> obj instanceof Map && ((Map<?, ?>) obj).size() == count;
-        checkResults.put("sizeOf", check);
+        checkResults.put("sizeof", check);
         return this;
     }
-    public MapSchema shape(Map<String, BaseSchema<?>> schemas) {
+    public MapSchema shape(Map<String, BaseSchema<String>> schemas) {
         Predicate<Map> check = (Map value) -> {
             for (var e: schemas.entrySet()) {
                 if (!e.getValue().isValid(value.get(e.getKey()))) {
