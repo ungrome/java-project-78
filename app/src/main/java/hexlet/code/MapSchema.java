@@ -17,8 +17,10 @@ public class MapSchema extends BaseSchema {
     }
     public MapSchema shape(Map<String, BaseSchema<?>> schemas) {
         Predicate<Map> check = (Map value) -> {
-            for(var e: schemas.entrySet()) {
-                if(!e.getValue().isValid(value.get(e.getKey()))) return false;
+            for (var e: schemas.entrySet()) {
+                if (!e.getValue().isValid(value.get(e.getKey()))) {
+                    return false;
+                }
             }
             return true;
         };

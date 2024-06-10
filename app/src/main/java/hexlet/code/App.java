@@ -1,6 +1,4 @@
 package hexlet.code;
-import hexlet.code.Validator;
-import hexlet.code.StringSchema;
 
 public class App {
     public static void main(String[] args) {
