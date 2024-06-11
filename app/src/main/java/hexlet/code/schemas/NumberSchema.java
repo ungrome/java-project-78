@@ -1,21 +1,22 @@
 package hexlet.code.schemas;
 
+import java.util.Objects;
 import java.util.function.Predicate;
 
-public class NumberSchema extends BaseSchema {
+public class NumberSchema extends BaseSchema<Integer>{
     public NumberSchema required() {
-        Predicate<Object> check = (obj) -> obj instanceof Number;
+        Predicate<Integer> check = Objects::nonNull;
         checkResults.put("required", check);
         return this;
     }
     public NumberSchema positive() {
-        Predicate<Object> check = (obj) -> (obj instanceof Number num) && (num.intValue() > 0);
+        Predicate<Integer> check = (obj) -> ((obj == null) || (obj.intValue() > 0));
         checkResults.put("positive", check);
         return this;
     }
     public NumberSchema range(int down, int up) {
-        Predicate<Object> check = (obj) -> (obj instanceof Number num)
-                && (num.intValue() >= down) && (num.intValue() <= up);
+        Predicate<Integer> check = (obj) -> ((obj == null)
+               || ((obj.intValue() >= down) && (obj.intValue() <= up)));
         checkResults.put("range", check);
         return this;
     }
