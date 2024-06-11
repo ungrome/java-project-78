@@ -2,7 +2,7 @@ package hexlet.code.schemas;
 
 import java.util.function.Predicate;
 
-public class StringSchema extends BaseSchema {
+public final class StringSchema extends BaseSchema {
 
     public StringSchema required() {
         Predicate<Object> check = (obj) -> obj instanceof String str && !str.isBlank();

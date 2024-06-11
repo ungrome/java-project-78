@@ -4,14 +4,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-public class NumberSchemaTest {
+public final class NumberSchemaTest {
     private Validator validator;
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         validator = new Validator();
     }
     @Test
-    void testNumberSchemaRequired() {
+    public void testNumberSchemaRequired() {
         var schema = validator.number();
         assertTrue(schema.isValid(null));
         assertTrue(schema.isValid(-1));
@@ -25,7 +25,7 @@ public class NumberSchemaTest {
     }
 
     @Test
-    void testNumberSchemaPositive() {
+    public void testNumberSchemaPositive() {
         var schema = validator.number();
         assertTrue(schema.isValid(null));
         assertTrue(schema.isValid(-1));
@@ -37,7 +37,7 @@ public class NumberSchemaTest {
     }
 
     @Test
-    void testNumberSchemaRange() {
+    public void testNumberSchemaRange() {
         var schema = validator.number();
         assertTrue(schema.isValid(null));
         assertTrue(schema.isValid(100));
@@ -49,7 +49,7 @@ public class NumberSchemaTest {
         assertFalse(schema.isValid(41));
     }
     @Test
-    void testNumberSchemaChained() {
+    public void testNumberSchemaChained() {
         var schema = validator.number();
         assertTrue(schema.isValid(null));
         assertTrue(schema.isValid(-100));
