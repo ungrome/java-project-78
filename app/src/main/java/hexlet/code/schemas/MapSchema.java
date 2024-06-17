@@ -1,30 +1,26 @@
 package hexlet.code.schemas;
 
 import java.util.Map;
-import java.util.function.Predicate;
 
 public final class MapSchema extends BaseSchema {
     public MapSchema required() {
-        Predicate<Object> check = (obj) -> obj instanceof Map;
-        checkResults.put("required", check);
+        addChecking("required", (obj) -> obj instanceof Map<?,?>);
         return this;
     }
     public MapSchema sizeof(int count) {
-        Predicate<Object> check;
-        check = (obj) -> obj instanceof Map && ((Map<?, ?>) obj).size() == count;
-        checkResults.put("sizeof", check);
+        addChecking("sizeof", (obj) -> obj instanceof Map && ((Map<?, ?>) obj).size() == count);
         return this;
     }
     public MapSchema shape(Map<String, BaseSchema<String>> schemas) {
-        Predicate<Map> check = (Map value) -> {
+        addChecking("shape", value -> {
             for (var e: schemas.entrySet()) {
-                if (!e.getValue().isValid(value.get(e.getKey()))) {
+                Map<?,?> valueToCheck = (Map) value;
+                if (!e.getValue().isValid(valueToCheck.get(e.getKey()))) {
                     return false;
                 }
             }
             return true;
-        };
-        checkResults.put("shape", check);
+        });
         return this;
     }
 
