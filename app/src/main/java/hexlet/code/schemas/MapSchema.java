@@ -4,7 +4,7 @@ import java.util.Map;
 
 public final class MapSchema extends BaseSchema {
     public MapSchema required() {
-        addChecking("required", (obj) -> obj instanceof Map<?,?>);
+        addChecking("required", (obj) -> obj instanceof Map<?, ?>);
         return this;
     }
     public MapSchema sizeof(int count) {
@@ -14,7 +14,7 @@ public final class MapSchema extends BaseSchema {
     public MapSchema shape(Map<String, BaseSchema<String>> schemas) {
         addChecking("shape", value -> {
             for (var e: schemas.entrySet()) {
-                Map<?,?> valueToCheck = (Map) value;
+                Map<?, ?> valueToCheck = (Map) value;
                 if (!e.getValue().isValid(valueToCheck.get(e.getKey()))) {
                     return false;
                 }
